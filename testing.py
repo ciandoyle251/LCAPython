@@ -37,4 +37,7 @@ class testBinTree(unittest.TestCase):
     def test_inputs(self):
 
         print("run")
-        self.assertEquals(2, findLCA(self.root, ))
+        self.assertEquals(2, findLCA(self.root, 19, 20))
+        self.assertEqual(1, findLCA(self.root, 16, 15))
+        self.assertEqual(4, findLCA(self.root, 16, 4))
+        self.assertEqual(9, findLCA(self.root, 9, 9))
