@@ -1,17 +1,50 @@
-# Python Program for Lowest Common Ancestor in a Binary Tree
-# O(n) solution to find LCS of two given values n1 and n2
+class newNode():
  
-# A binary tree node
-class Node:
-    # Constructor to create a new binary node
-    def __init__(self, key):
-        self.key =  key
+    def __init__(self, data):
+        self.key = data
         self.left = None
         self.right = None
+         
+""" Inorder traversal of a binary tree"""
+def inorder(temp):
  
-# Finds the path from root node to given root of the tree.
-# Stores the path in a list path[], returns true if path
-# exists otherwise false
+    if (not temp):
+        return
+ 
+    inorder(temp.left)
+    print(temp.key,end = " ")
+    inorder(temp.right)
+ 
+ 
+"""function to insert element in binary tree """
+def insert(temp,key):
+ 
+    if not temp:
+        root = newNode(key)
+        return
+    q = []
+    q.append(temp)
+ 
+    # Do level order traversal until we find
+    # an empty place.
+    while (len(q)):
+        temp = q[0]
+        q.pop(0)
+ 
+        if (not temp.left):
+            temp.left = newNode(key)
+            break
+        else:
+            q.append(temp.left)
+ 
+        if (not temp.right):
+            temp.right = newNode(key)
+            break
+        else:
+            q.append(temp.right)
+
+
+
 def findPath( root, path, k):
  
     # Baes Case
@@ -57,21 +90,20 @@ def findLCA(root, n1, n2):
             break
         i += 1
     return path1[i-1]
+     
+# Driver code
+if __name__ == '__main__':
+    root = newNode(1)
+    ##root = newNode(10)
+    # print("Inorder traversal before insertion:", end = " ")
+    # inorder(root)
  
+    key = 12
+    insert(root, key)
+
+
+
  
-# Driver program to test above function
-# Let's create the Binary Tree shown in above diagram
-root = Node(1)
-root.left = Node(2)
-root.right = Node(3)
-root.left.left = Node(4)
-root.left.right = Node(5)
-root.right.left = Node(6)
-root.right.right = Node(7)
- 
-print (findLCA(root, 4, 5,))
-print (findLCA(root, 4, 6))
-print (findLCA(root,3,4))
-print (findLCA(root,2, 4))
- 
-# This code is contributed by Nikhil Kumar Singh(nickzuck_007)
+    print(findLCA(root, 12, 1))
+    # print("Inorder traversal after insertion:", end = " ")
+    # inorder(root)
